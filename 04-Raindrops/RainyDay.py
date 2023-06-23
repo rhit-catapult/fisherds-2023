@@ -95,11 +95,14 @@ class Cloud:
 
     def rain(self):
         """ Adds a Raindrop to the array of raindrops so that it looks like the Cloud is raining. """
-        # TODO 28: Append a new Raindrop to this Cloud's list of raindrops,
+        # Done 28: Append a new Raindrop to this Cloud's list of raindrops,
         #     where the new Raindrop starts at:
         #       - x is a random integer between this Cloud's x and this Cloud's x + 300.
         #       - y is this Cloud's y + 100.
-        pass
+        new_drop = Raindrop(self.screen,
+                            random.randint(self.x, self.x + self.image.get_width()),
+                            self.y + self.image.get_height() - 20)
+        self.raindrops.append(new_drop)
 
 
 def main():
@@ -113,7 +116,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Done 7: As a temporary test, make a new Raindrop called test_drop at x=320 y=10
-    test_drop = Raindrop(screen, 320, 10)
+    # test_drop = Raindrop(screen, 320, 10)
 
     # Done 15: Make a Hero, named mike, with appropriate images, starting at position x=200 y=400.
     # Done 15: Make a Hero, named alyssa, with appropriate images, starting at position x=700 y=400.
@@ -159,20 +162,20 @@ def main():
         # Done 12: As a temporary test, move test_drop
         # Done 14: As a temporary test, check if test_drop is off screen, if so reset the y position to 10
         # Done 10: As a temporary test, draw test_drop
-        test_drop.move()
-        if test_drop.is_off_screen():
-            test_drop.y = 0
-        test_drop.draw()
+        # test_drop.move()
+        # if test_drop.is_off_screen():
+        #     test_drop.y = 0
+        # test_drop.draw()
 
         # Done 20: As a temporary test, check if test_drop is hitting Mike (or Alyssa), if so set their last_hit_time
-        if mike.is_hit_by(test_drop):
-            mike.last_hit_time = time.time()
-            test_drop.y = 0
-            test_drop.x = 750
-        if alyssa.is_hit_by(test_drop):
-            alyssa.last_hit_time = time.time()
-            test_drop.y = 0
-            test_drop.x = 250
+        # if mike.is_hit_by(test_drop):
+        #     mike.last_hit_time = time.time()
+        #     test_drop.y = 0
+        #     test_drop.x = 750
+        # if alyssa.is_hit_by(test_drop):
+        #     alyssa.last_hit_time = time.time()
+        #     test_drop.y = 0
+        #     test_drop.x = 250
 
         # Done 22: Remove the code that reset the y of the test_drop when off_screen()
         #          Instead reset the test_drop y to 10 when mike is hit, additionally set the x to 750
@@ -189,6 +192,19 @@ def main():
             #       - draw the Raindrop.
             # TODO  30: if the Hero (Mike or Alyssa) is hit by a Raindrop, set the Hero's last_time_hit to the current time.
             # Optional  - if the Raindrop is off the screen or hitting a Hero, remove it from the Cloud's list of raindrops.
+
+        cloud.rain()
+        for drop in cloud.raindrops:
+            drop.move()
+            drop.draw()
+            if mike.is_hit_by(drop):
+                mike.last_hit_time = time.time()
+                cloud.raindrops.remove(drop)
+            if alyssa.is_hit_by(drop):
+                alyssa.last_hit_time = time.time()
+                cloud.raindrops.remove(drop)
+            if drop.is_off_screen():
+                cloud.raindrops.remove(drop)
 
         # Done 18: Draw the Heroes (Mike and Alyssa)
         mike.draw()
