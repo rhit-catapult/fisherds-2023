@@ -26,9 +26,19 @@ def main():
                 sys.exit()
 
         screen.fill((0, 0, 0))
-        # TODO 3: If pygame.K_LEFT is pressed and move the fighter left 5 (i.e. -5)
-        # TODO 4: If pygame.K_RIGHT is pressed and move the fighter right 5
-        # TODO 2: Draw the fighter
+        # Done 3: If pygame.K_LEFT is pressed and move the fighter left 5 (i.e. -5)
+        # Done 4: If pygame.K_RIGHT is pressed and move the fighter right 5
+
+        # Doing something continually when a key is HELD DOWN
+        pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[pygame.K_LEFT]:
+            fighter.move(-5)
+        if pressed_keys[pygame.K_RIGHT]:
+            fighter.move(5)
+
+
+        # Done 2: Draw the fighter
+        fighter.draw()
 
         # TODO 11: Move the enemy_fleet
         # TODO 12: Draw the enemy_fleet
