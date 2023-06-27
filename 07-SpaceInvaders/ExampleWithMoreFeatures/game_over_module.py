@@ -2,6 +2,7 @@ import pygame
 import sys
 import button_module
 
+
 def main():
     pygame.init()
     pygame.display.set_caption("Testing the Game Over Screen")

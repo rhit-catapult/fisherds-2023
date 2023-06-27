@@ -23,7 +23,6 @@ def main():
                                                     pygame.Color("White"))
     instruction_caption2 = instructions_font.render("and the spacebar to fire.  Good luck!", True, pygame.Color("White"))
 
-
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)
