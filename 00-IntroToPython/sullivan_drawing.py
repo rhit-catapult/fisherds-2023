@@ -30,7 +30,6 @@ def main():
 
         screen.fill((255, 255, 255))
         screen.blit(background, (0, 0))
-        # screen.bilt(box, (0, 0))
         pygame.draw.rect(screen, (254, 230, 70), (50, 300, 400, 100))
         num_str = str(num).zfill(5)
         big_text = num_str
